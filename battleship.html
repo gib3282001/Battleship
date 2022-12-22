@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Battleship</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 2px solid rgb(200,200,200);
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+      }
+
+      td, th {
+        border: 1px solid rgb(190,190,190);
+        padding: 10px 20px;
+      }
+
+      th {
+        background-color: rgb(235,235,235);
+      }
+
+      td {
+        text-align: center;
+      }
+
+      tr:nth-child(even) td {
+        background-color: rgb(0, 230, 230);
+      }
+
+      tr:nth-child(odd) td {
+        background-color: rgb(0,204,204);
+      }
+
+      caption {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player1" class="panel">
+      <h1>Player 1</h1>
+      <input id="player1name" placeholder="Enter your name">
+      <br><br>
+      <h2>Ship Placements</h2>
+      <input id="player1ships">
+      <br><br>
+      <button class="button" id="button1">Next Player</button>
+    </div>
+
+    <div id="player2" class="panel" hidden>
+      <h1>Player 2</h1>
+      <input id="player2name" placeholder="Enter your name">
+      <br><br>
+      <h2>Ship Placements</h2>
+      <input id="player2ships">
+      <br><br>
+      <button class="button" id="button2">Start Game</button>
+    </div>
+
+    <div id="player1table" class="panel" hidden>
+      <h1>Your Ships</h1>
+      <table id="player1board">
+        <tr>
+          <td>&nbsp;</td>
+          <td>A</td>
+          <td>B</td>
+          <td>C</td>
+          <td>D</td>
+          <td>E</td>
+          <td>F</td>
+          <td>G</td>
+          <td>H</td>
+          <td>I</td>
+          <td>J</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <h2 class>Your Targets</h2>
+      <table id="player1opp">
+        <tr>
+          <td>&nbsp;</td>
+          <td>A</td>
+          <td>B</td>
+          <td>C</td>
+          <td>D</td>
+          <td>E</td>
+          <td>F</td>
+          <td>G</td>
+          <td>H</td>
+          <td>I</td>
+          <td>J</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="player2table" class="panel" hidden>
+      <h1>Your Ships</h1>
+      <table id="player2board">
+        <tr>
+          <td>&nbsp;</td>
+          <td>A</td>
+          <td>B</td>
+          <td>C</td>
+          <td>D</td>
+          <td>E</td>
+          <td>F</td>
+          <td>G</td>
+          <td>H</td>
+          <td>I</td>
+          <td>J</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <h2>Your Targets</h2>
+      <table id="player2opp">
+        <tr>
+          <td>&nbsp;</td>
+          <td>A</td>
+          <td>B</td>
+          <td>C</td>
+          <td>D</td>
+          <td>E</td>
+          <td>F</td>
+          <td>G</td>
+          <td>H</td>
+          <td>I</td>
+          <td>J</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="player1turn" class="panel" hidden>
+      <h1 id="Okp1">Click Ok to start turn</h1>
+      <button class="button" id="p1startt">Ok</button>
+    </div>
+
+    <div id="player1turns" class="panel" hidden>
+      <h1 id="Okp11">Click Ok to start turn</h1>
+      <button class="button" id="p1start">Ok</button>
+    </div>
+
+    <div id="player2turn" class="panel" hidden>
+      <h1 id="Okp2">Click Ok to start turn</h1>
+      <button class="button" id="p2start">Ok</button>
+    </div>
+
+    <div id="scores" hidden>
+      <h1 id="p1score"></h1>
+      <h2 id="p2score"></h2>
+    </div>
+
+    <script type="text/javascript">
+      let p1Name = "";
+      let p2Name = "";
+      let p1ships = "";
+      let p2ships = "";
+      let p1AC = "";
+      let p2AC = "";
+      let p1B = "";
+      let p2B = "";
+      let p1S = "";
+      let p2S = "";
+      let p1Board = [
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""]
+      ];
+      let p2Board = [
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""],
+    	["","","","","","","","","",""]
+      ];
+      let w = 0;
+      let w2 = 0;
+      console.log(w);
+      console.log(w2);
+      document.getElementById("button1").addEventListener("click", function() {document.getElementById("player1").hidden = true;
+      document.getElementById("player2").hidden = false;});
+
+      let namesAndShips = () => {
+        p1Name = document.getElementById("player1name").value;
+        p2Name = document.getElementById("player2name").value;
+        p1ships = document.getElementById("player1ships").value.split(";");
+        p2ships = document.getElementById("player2ships").value.split(";");
+        p1AC = p1ships[0];
+        p2AC = p2ships[0];
+        p1B = p1ships[1];
+        p2B = p2ships[1];
+        p1S = p1ships[2];
+        p2S = p2ships[2];
+        document.getElementById("Okp1").innerText = "Click Ok to begin "+ p1Name +"'s turn";
+        document.getElementById("Okp2").innerText = "Click Ok to begin "+ p2Name +"'s turn";
+        document.getElementById("Okp11").innerText = "Click Ok to begin "+ p1Name +"'s turn";
+        let mp = new Map();
+        mp.set("A", 0);
+        mp.set("B", 1);
+        mp.set("C", 2);
+        mp.set("D", 3);
+        mp.set("E", 4);
+        mp.set("F", 5);
+        mp.set("G", 6);
+        mp.set("H", 7);
+        mp.set("I", 8);
+        mp.set("J", 9);
+        if(p1AC.charAt(2) == p1AC.charAt(5)){
+          let r = parseInt(p1AC.charAt(3)) - 1;
+          let c = mp.get(p1AC.charAt(2));
+          let i  = 0;
+          while(i < 5){
+            p1Board[r+i][c] = "A";
+            i = i + 1;
+          }
+        }else{
+          let r = parseInt(p1AC.charAt(3)) - 1;
+          let c = mp.get(p1AC.charAt(2));
+          let i = 0;
+          while(i < 5){
+            p1Board[r][c+i] = "A";
+            i = i + 1;
+          }
+        }
+        if(p2AC.charAt(2) == p2AC.charAt(5)){
+          let r = parseInt(p2AC.charAt(3)) - 1;
+          let c = mp.get(p2AC.charAt(2));
+          let i  = 0;
+          while(i < 5){
+            p2Board[r + i][c] = "A";
+            i = i + 1;
+          }
+        }else{
+          let r = parseInt(p2AC.charAt(3)) - 1;
+          let c = mp.get(p2AC.charAt(2));
+          let i = 0;
+          while(i < 5){
+            p2Board[r][c+i] = "A";
+            i = i + 1;
+          }
+        }
+        if(p1B.charAt(2) == p1B.charAt(5)){
+          let r = parseInt(p1B.charAt(3)) - 1;
+          let c = mp.get(p1B.charAt(2));
+          let i  = 0;
+          while(i < 4){
+            p1Board[r + i][c] = "B";
+            i = i + 1;
+          }
+        }else{
+          let r = parseInt(p1B.charAt(3)) - 1;
+          let c = mp.get(p1B.charAt(2));
+          let i = 0;
+          while(i < 4){
+            p1Board[r][c+i] = "B";
+            i = i + 1;
+          }
+        }
+        if(p2B.charAt(2) == p2B.charAt(5)){
+          let r = parseInt(p2B.charAt(3)) - 1;
+          let c = mp.get(p2B.charAt(2));
+          let i  = 0;
+          while(i < 4){
+            p2Board[r + i][c] = "B";
+            i = i + 1;
+          }
+        }else{
+          let r = parseInt(p2B.charAt(3)) - 1;
+          let c = mp.get(p2B.charAt(2));
+          let i = 0;
+          while(i < 4){
+            p2Board[r][c+i] = "B";
+            i = i + 1;
+          }
+        }
+        if(p1S.charAt(2) == p1S.charAt(5)){
+          let r = parseInt(p1S.charAt(3)) - 1;
+          let c = mp.get(p1S.charAt(2));
+          let i  = 0;
+          while(i < 3){
+            p1Board[r + i][c] = "S";
+            i = i + 1;
+          }
+        }else{
+          let r = parseInt(p1S.charAt(3)) - 1;
+          let c = mp.get(p1S.charAt(2));
+          let i = 0;
+          while(i < 3){
+            p1Board[r][c+i] = "S";
+            i = i + 1;
+          }
+        }
+        if(p2S.charAt(2) == p2S.charAt(5)){
+          let r = parseInt(p2S.charAt(3)) - 1;
+          let c = mp.get(p2S.charAt(2));
+          let i  = 0;
+          while(i < 3){
+            p2Board[r + i][c] = "S";
+            i = i + 1;
+          }
+        }else{
+          let r = parseInt(p2S.charAt(3)) - 1;
+          let c = mp.get(p2S.charAt(2));
+          let i = 0;
+          while(i < 3){
+            p2Board[r][c+i] = "S";
+            i = i + 1;
+          }
+        }
+        document.getElementById("player2").hidden = true;
+        document.getElementById("player1turn").hidden = false;
+      }
+      document.getElementById("button2").addEventListener("click", namesAndShips);
+      let displayTable = () => {
+        document.getElementById("player1turn").hidden = true;
+        let table = document.getElementById("player1board");
+        let opptable = document.getElementById("player2opp");
+        for(var i = 1; i < table.rows.length; i++){
+          for(var j = 1; j < table.rows[i].cells.length; j++){
+            table.rows[i].cells[j].innerHTML = p1Board[i - 1][j - 1];
+            if(p1Board[i - 1][j - 1] != ""){
+              let currcell = opptable.rows[i].cells[j];
+              opptable.rows[i].cells[j].addEventListener("click", () => {currcell.style.backgroundColor = "Red";
+              document.getElementById("player2table").hidden = true;
+              w2 += 2;
+              if(w2 == 24){
+                let t = w2;
+                w2 = w2 - w;
+                w = w2 - t;
+                document.getElementById("p1score").innerText = p1Name + "'s score: " + w;
+                document.getElementById("p2score").innerText = p2Name + "'s score (winner): " + w2;
+                document.getElementById("scores").hidden = false;
+              }else{
+                document.getElementById("player1turns").hidden = false;
+              }});
+            }else{
+              let currcell = opptable.rows[i].cells[j];
+              opptable.rows[i].cells[j].addEventListener("click", () => {currcell.style.backgroundColor = "White";
+              document.getElementById("player2table").hidden = true; document.getElementById("player1turns").hidden = false;});
+            }
+          }
+        }
+        let table2 = document.getElementById("player2board");
+        let opptable2 = document.getElementById("player1opp");
+        for(var i = 1; i < table.rows.length; i++){
+          for(var j = 1; j < table.rows[i].cells.length; j++){
+            table2.rows[i].cells[j].innerHTML = p2Board[i - 1][j - 1];
+            if(p2Board[i - 1][j - 1] != ""){
+              let currcell = opptable2.rows[i].cells[j];
+              opptable2.rows[i].cells[j].addEventListener("click", () => {currcell.style.backgroundColor = "Red";
+              document.getElementById("player1table").hidden = true;
+              w += 2;
+              console.log(w);
+              if(w == 24){
+                let t = w;
+                w = w - w2;
+                w2 = w2 - t;
+                document.getElementById("p1score").innerText = p1Name + "'s score (winner): " + w;
+                document.getElementById("p2score").innerText = p2Name + "'s score: " + w2;
+                document.getElementById("scores").hidden = false;
+              }else{
+                document.getElementById("player2turn").hidden = false;
+              }});
+            }else{
+              let currcell = opptable2.rows[i].cells[j];
+              opptable2.rows[i].cells[j].addEventListener("click", () => {currcell.style.backgroundColor = "White"; console.log(w);
+              document.getElementById("player1table").hidden = true; document.getElementById("player2turn").hidden = false;});
+            }
+          }
+        }
+        document.getElementById("player1table").hidden = false;
+      }
+      document.getElementById("p1startt").addEventListener("click", displayTable);
+      document.getElementById("p2start").addEventListener("click", function() {document.getElementById("player2turn").hidden = true;
+      document.getElementById("player2table").hidden = false;});
+      document.getElementById("p1start").addEventListener("click", function() {document.getElementById("player1turns").hidden = true;
+      document.getElementById("player1table").hidden = false;});
+      console.log(p1Board);
+      console.log(p2Board);
+      console.log(document.getElementById("player1board"));
+    </script>
+  </body>
+</html>
